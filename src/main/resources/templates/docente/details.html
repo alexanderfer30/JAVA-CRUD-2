@@ -1,0 +1,52 @@
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="/layouts/_mainLayout">
+
+<div layout:fragment="content">
+    <h1>Detalles del docente</h1>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="nombre">Nombre</label>
+                <p id="nombre" th:text="${docente.nombre}">Nombre del docente</p>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="apellido">Apellido</label>
+                <p id="apellido" th:text="${docente.apellido}">Apellido del docente</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="email">Email</label>
+                <p id="email" th:text="${docente.email}">Email del docente</p>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="telefono">Teléfono</label>
+                <p id="telefono" th:text="${docente.telefono}">Teléfono del docente</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="escuela">Escuela</label>
+                <p id="escuela" th:text="${docente.escuela}">Escuela del docente</p>
+            </div>
+        </div>
+    </div>
+
+    <a th:href="@{/Docentes}" class="btn btn-outline-secondary">Regresar</a>
+    <a th:href="@{/Docentes/edit/{id}(id=${docente.id})}" class="btn btn-outline-info">Editar</a>
+
+</div>
+</html>
