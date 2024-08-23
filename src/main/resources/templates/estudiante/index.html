@@ -1,0 +1,64 @@
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="/layouts/_mainLayout" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<div layout:fragment="content">
+    <!-- Mensajes de éxito o error usando Swal.fire -->
+    <div th:if="${msg != null}">
+        <script>
+            Swal.fire({
+                title: "Confirmación",
+                text: '[[ ${msg} ]]',
+                icon: "success"
+            });
+        </script>
+    </div>
+
+    <div th:if="${error != null}">
+        <script>
+            Swal.fire({
+                title: "Error",
+                text: '[[ ${error} ]]',
+                icon: "error"
+            });
+        </script>
+    </div>
+
+    <!-- Encabezado y botón para crear nuevo estudiante -->
+    <h1>Listado de Estudiantes</h1>
+    <a th:href="@{/Estudiantes/create}" class="btn btn-outline-primary">Nuevo Estudiante</a>
+
+    <!-- Tabla para mostrar la lista de estudiantes -->
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>PIN</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="item : ${estudiantes.content}">
+            <td th:text="${item.id}"></td>
+            <td th:text="${item.nombre}"></td>
+            <td th:text="${item.email}"></td>
+            <td th:text="${item.pin}"></td>
+            <td>
+                <a th:href="@{/Estudiantes/details/{id}(id=${item.id})}" class="btn btn-outline-secondary">Detalles</a>
+                <a th:href="@{/Estudiantes/edit/{id}(id=${item.id})}" class="btn btn-outline-info">Editar</a>
+                <a th:href="@{/Estudiantes/remove/{id}(id=${item.id})}" class="btn btn-outline-danger">Eliminar</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <!-- Paginación -->
+    <nav class="Page navigation example">
+        <ul class="pagination">
+            <li class="page-item" th:each="pageNumber : ${pageNumber}">
+                <a class="page-link" th:href="@{|/Estudiantes?page=${pageNumber}|}" th:text="${pageNumber}"></a>
+            </li>
+        </ul>
+    </nav>
+</div>
+</html>

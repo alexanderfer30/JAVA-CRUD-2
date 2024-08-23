@@ -3,6 +3,10 @@ package com.ESFE.Asistencias.Entidades;
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Table(name = "grupos")
 public class Grupo {
@@ -14,6 +18,11 @@ public class Grupo {
     private String nombre;
     @Nullable
     private String descripcion;
+
+    @ManyToMany(mappedBy = "grupos")
+    private Set<Docente> docentes = new HashSet<>();
+    @ManyToMany(mappedBy = "grupos")
+    private Set<Estudiante> estudiantes = new HashSet<>();
 
     public Integer getId() {
         return id;

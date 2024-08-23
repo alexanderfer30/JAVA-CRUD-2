@@ -1,0 +1,43 @@
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="/layouts/_mainLayout">
+
+<div layout:fragment="content">
+    <h1>Editar Asignación Estudiante-Grupo</h1>
+    <form th:action="@{/EstudianteGrupos/update}" th:object="${estudiantesGrupos}"  method="post">
+        <!-- Eliminar el campo oculto para el ID -->
+        <input type="hidden" th:field="*{id}" name="id" />
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="estudiante">Estudiante</label>
+                    <select class="form-control" name="estudianteId" id="estudiante" required>
+                        <option th:each="estudiante : ${estudiantes}" th:value="${estudiante.id}"
+                                th:text="${estudiante.nombre}"
+                                th:selected="${estudiante.id == estudiantesGrupos.estudiante.id}">
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="grupo">Grupo</label>
+                    <select class="form-control" name="grupoId" id="grupo" required>
+                        <option th:each="grupo : ${grupos}" th:value="${grupo.id}"
+                                th:text="${grupo.nombre}"
+                                th:selected="${grupo.id == estudiantesGrupos.grupo.id}">
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Guardar cambios</button> |
+        <a th:href="@{/EstudianteGrupos}">Regresar</a>
+    </form>
+</div>
+</html>
